@@ -12,60 +12,68 @@ import { AddProductPage, AdminOrdersPage, CartPage, CheckoutPage, ForgotPassword
 import { AdminDashboardPage } from './pages/AdminDashboardPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 
-
 function App() {
 
-  const isAuthChecked=useSelector(selectIsAuthChecked)
-  const loggedInUser=useSelector(selectLoggedInUser)
-
+  const isAuthChecked = useSelector(selectIsAuthChecked)
+  const loggedInUser = useSelector(selectLoggedInUser)
 
   useAuthCheck();
   useFetchLoggedInUserDetails(loggedInUser);
 
-
   const routes = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path='/signup' element={<SignupPage/>}/>
-        <Route path='/login' element={<LoginPage/>}/>
-        <Route path='/verify-otp' element={<OtpVerificationPage/>}/>
-        <Route path='/forgot-password' element={<ForgotPasswordPage/>}/>
-        <Route path='/reset-password/:userId/:passwordResetToken' element={<ResetPasswordPage/>}/>
-        <Route exact path='/logout' element={<Protected><Logout/></Protected>}/>
-        <Route exact path='/product-details/:id' element={<Protected><ProductDetailsPage/></Protected>}/>
+        {
+          !loggedInUser ? (
+            // Routes for non-authenticated users (Login and Signup)
+            <>
+              <Route path='/signup' element={<SignupPage />} />
+              <Route path='/login' element={<LoginPage />} />
+            </>
+          ) : (
+            // If logged in, redirect to home if trying to access login/signup
+            <>
+              <Route path='/signup' element={<Navigate to="/" replace />} />
+              <Route path='/login' element={<Navigate to="/" replace />} />
+            </>
+          )
+        }
+        <Route path='/verify-otp' element={<OtpVerificationPage />} />
+        <Route path='/forgot-password' element={<ForgotPasswordPage />} />
+        <Route path='/reset-password/:userId/:passwordResetToken' element={<ResetPasswordPage />} />
+        <Route exact path='/logout' element={<Protected><Logout /></Protected>} />
+        <Route exact path='/product-details/:id' element={<Protected><ProductDetailsPage /></Protected>} />
 
         {
-          loggedInUser?.isAdmin?(
+          loggedInUser?.isAdmin ? (
             // admin routes
             <>
-            <Route path='/admin/dashboard' element={<Protected><AdminDashboardPage/></Protected>}/>
-            <Route path='/admin/product-update/:id' element={<Protected><ProductUpdatePage/></Protected>}/>
-            <Route path='/admin/add-product' element={<Protected><AddProductPage/></Protected>}/>
-            <Route path='/admin/orders'  element={<Protected><AdminOrdersPage/></Protected>}/>
-            <Route path='*' element={<Navigate to={'/admin/dashboard'}/>}/>
+              <Route path='/admin/dashboard' element={<Protected><AdminDashboardPage /></Protected>} />
+              <Route path='/admin/product-update/:id' element={<Protected><ProductUpdatePage /></Protected>} />
+              <Route path='/admin/add-product' element={<Protected><AddProductPage /></Protected>} />
+              <Route path='/admin/orders' element={<Protected><AdminOrdersPage /></Protected>} />
+              <Route path='*' element={<Navigate to={'/admin/dashboard'} />} />
             </>
-          ):(
+          ) : (
             // user routes
             <>
-            <Route path='/' element={<Protected><HomePage/></Protected>}/>
-            <Route path='/cart' element={<Protected><CartPage/></Protected>}/>
-            <Route path='/profile' element={<Protected><UserProfilePage/></Protected>}/>
-            <Route path='/checkout' element={<Protected><CheckoutPage/></Protected>}/>
-            <Route path='/order-success/:id' element={<Protected><OrderSuccessPage/></Protected>}/>
-            <Route path='/orders' element={<Protected><UserOrdersPage/></Protected>}/>
-            <Route path='/wishlist' element={<Protected><WishlistPage/></Protected>}/>
+              <Route path='/' element={<Protected><HomePage /></Protected>} />
+              <Route path='/cart' element={<Protected><CartPage /></Protected>} />
+              <Route path='/profile' element={<Protected><UserProfilePage /></Protected>} />
+              <Route path='/checkout' element={<Protected><CheckoutPage /></Protected>} />
+              <Route path='/order-success/:id' element={<Protected><OrderSuccessPage /></Protected>} />
+              <Route path='/orders' element={<Protected><UserOrdersPage /></Protected>} />
+              <Route path='/wishlist' element={<Protected><WishlistPage /></Protected>} />
             </>
           )
         }
 
-        <Route path='*' element={<NotFoundPage/>} />
-
+        <Route path='*' element={<NotFoundPage />} />
       </>
     )
   )
 
-  
-  return isAuthChecked ? <RouterProvider router={routes}/> : "";
+  return isAuthChecked ? <RouterProvider router={routes} /> : "";
 }
 
 export default App;

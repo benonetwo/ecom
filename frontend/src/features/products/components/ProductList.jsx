@@ -260,7 +260,7 @@ export const ProductList = () => {
                 {
                     !is600 && 
                 
-                <Stack sx={{width:"100%",height:is800?"300px":is1200?"400px":"500px"}}>
+                <Stack sx={{width:"100%",height:is800?"2900px":is1200?"400px":"650px"}}>
                     <ProductBanner images={bannerImages}/>
                 </Stack>
                 }

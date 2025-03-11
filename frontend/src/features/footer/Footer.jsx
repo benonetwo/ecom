@@ -60,9 +60,9 @@ export const Footer = () => {
                     <Typography sx={{...labelStyles,color:"graytext",fontWeight:500}}>Save $3 with App New User Only</Typography>
                     <Stack flexDirection={'row'} columnGap={'.5rem'}>
 
-                        <Box width={'100px'} height={"100px"}>
+                        {/* <Box width={'100px'} height={"100px"}>
                             <img src={QRCodePng} height={'100%'} width={'100%'} style={{objectFit:'contain'}} alt="QR Code"/>
-                        </Box>
+                        </Box> */}
 
                         <Stack justifyContent={'space-around'}>
                             <Stack>

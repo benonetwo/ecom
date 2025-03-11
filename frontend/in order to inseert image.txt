@@ -1,0 +1,25 @@
+in order to inseert image into the  database you need to create a cloudanery account that's free  ---> https://cloudinary.com/   and upload the images you want to past then copy the embedded links to the insert pages an example of an embedded links is ---->https://cdn.dummyjson.com/product-images/4/thumbnail.jpg
+
+
+CHAT GPT explanation 
+
+How to Insert Images into a Database Using Cloudinary
+If you want to store and display images in your application but don’t want to host them locally, you can use Cloudinary—a free and powerful cloud-based image management platform. Below are the steps to get started:
+
+Step 1: Create a Cloudinary Account
+Visit Cloudinary's website.
+Sign up for a free account if you don’t already have one. The free tier allows you to manage and store up to 25,000 image transformations and 25 GB of managed storage, which is sufficient for small to medium projects.
+Step 2: Upload Your Images
+Once logged in, navigate to the Media Library section in the Cloudinary dashboard.
+Click the Upload button and select the images you want to use in your application.
+After uploading, Cloudinary generates a unique URL for each image.
+Step 3: Copy the Image URL
+Locate the uploaded image in the Media Library.
+Click on the image to view its details.
+Copy the Embedded Link (URL) provided. The link will look something like this:
+bash
+Copy
+Edit
+https://res.cloudinary.com/your-cloud-name/image/upload/v123456789/image-name.jpg
+This URL will allow you to access the image directly from Cloudinary servers.
+
